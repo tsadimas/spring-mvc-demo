@@ -1,0 +1,9 @@
+# Directories #
+build/
+bin/
+target/
+
+# eclipse project file
+.settings/
+.classpath
+.project
