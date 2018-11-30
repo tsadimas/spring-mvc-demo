@@ -9,6 +9,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @Controller
 public class HomeController {
 	
+	
+	@RequestMapping("/")
+	public String showfirstpage() {
+	        return "index";
+	}
+	
 	@RequestMapping("/showForm")
 	public String showForm() {
 	        return "helloworld-form";
