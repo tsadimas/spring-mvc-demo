@@ -30,3 +30,12 @@ To fix the errors in jsp files, you should again right click the project, and in
 
 
 right click on project and select  Maven -> Update Project
+
+
+### add application.properties file with jdbc parameters in src directory
+
+```
+jdbc.url=jdbc:mysql://SERVER-IP/DB-NAME?useSSL=false
+jdbc.user=USER-NAME
+jdbc.password=PASSWORD
+```
