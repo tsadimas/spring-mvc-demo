@@ -15,7 +15,10 @@
 		http://www.springframework.org/schema/tx/spring-tx.xsd">
 
 
-	
+	<!--  application properties file -->
+	<context:property-placeholder location="classpath:application.properties" />
+
+
 	<!-- Add support for component scanning -->
 	<context:component-scan
 		base-package="gr.hua.dit.springmvc1" />
@@ -36,9 +39,9 @@
 		destroy-method="close">
 		<property name="driverClass" value="com.mysql.jdbc.Driver" />
 		<property name="jdbcUrl"
-			value="jdbc:mysql://83.212.105.20/hbstudent?useSSL=false" />
-		<property name="user" value="hbstudent" />
-		<property name="password" value="changeit" />
+			value="${jdbc.url}" />
+		<property name="user" value="${jdbc.user}" />
+		<property name="password" value="${jdbc.password}" />
 
 		<!-- these are connection pool properties for C3P0 -->
 		<property name="initialPoolSize" value="5" />
