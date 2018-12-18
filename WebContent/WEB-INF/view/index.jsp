@@ -10,7 +10,7 @@
 </head>
 <body>
 <h1>Spring MVC demo project!</h1>
-
+<p>Δοκιμαστική σελίδα</p>
 <a href="<c:url value="/showForm"></c:url>">Show Form</a>
 </body>
 </html>
