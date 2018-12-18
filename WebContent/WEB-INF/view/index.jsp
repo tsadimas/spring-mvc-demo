@@ -20,7 +20,12 @@
 		<form:form action="${pageContext.request.contextPath}/logout" method="POST">
 		<input type="submit" value="Logout" />
 		</form:form>
+		
+		<a href="<c:url value="/customer/addCustomer"></c:url>">Add a Customer</a>
+		
 </sec:authorize>
-<a href="<c:url value="/showForm"></c:url>">Show Form</a>
+
+<a href="<c:url value="/customer/list"></c:url>">List Customers</a>
+
 </body>
 </html>

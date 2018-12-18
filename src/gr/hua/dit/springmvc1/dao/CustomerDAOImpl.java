@@ -4,7 +4,7 @@ import java.util.List;
 
 import javax.transaction.Transactional;
 
-import org.hibernate.Query;
+import org.hibernate.query.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,6 +33,47 @@ public class CustomerDAOImpl implements CustomerDAO {
 
 		// return the results
 		return customers;
+	}
+
+	@Override
+	@Transactional
+	public void saveCustomer(Customer customer) {
+		// get current hibernate session
+		Session currentSession = sessionFactory.getCurrentSession();
+
+		if (customer.getId() != 0) {
+			// update the customer
+			currentSession.update(customer);
+		} else {
+			// save the student
+			currentSession.save(customer);
+		}
+
+	}
+
+	@Override
+	@Transactional
+	public Customer getCustomer(int id) {
+		// get current hibernate session
+		Session currentSession = sessionFactory.getCurrentSession();
+
+		// get and return Customer
+		Customer customer = currentSession.get(Customer.class, id);
+		return customer;
+	}
+
+	@Override
+	@Transactional
+	public void deleteCustomer(int id) {
+		// get current hibernate session
+		Session currentSession = sessionFactory.getCurrentSession();
+
+		// find the Customer
+		Customer Customer = currentSession.get(Customer.class, id);
+
+		// delete Customer
+		currentSession.delete(Customer);
+
 	}
 
 }
