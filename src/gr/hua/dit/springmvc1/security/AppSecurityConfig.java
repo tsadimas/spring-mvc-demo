@@ -14,21 +14,24 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
+import org.springframework.security.core.userdetails.UserDetailsService;
+
 @Configuration
 @EnableWebSecurity
 @EnableGlobalMethodSecurity(securedEnabled = true)
-
 public class AppSecurityConfig extends WebSecurityConfigurerAdapter {
 
 	@Autowired
 	DataSource dataSource;
+	
+	@Autowired
+	  private UserDetailsService userDetailsService;
 
 	@Override
 	protected void configure(AuthenticationManagerBuilder auth) throws Exception {
 
-		auth.jdbcAuthentication().dataSource(dataSource).passwordEncoder(passwordEncoder())
-				.usersByUsernameQuery("select username,password, enabled from user where username=?")
-				.authoritiesByUsernameQuery("select username, authority from authorities where username=?");
+	    auth.userDetailsService(userDetailsService).passwordEncoder(passwordEncoder());
+
 
 	}
 
@@ -54,3 +57,4 @@ public class AppSecurityConfig extends WebSecurityConfigurerAdapter {
 		return encoder;
 	}
 }
+
