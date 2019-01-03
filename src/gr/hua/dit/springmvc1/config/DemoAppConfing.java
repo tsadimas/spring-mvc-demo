@@ -1,7 +1,7 @@
 package gr.hua.dit.springmvc1.config;
 
 import java.beans.PropertyVetoException;
-import java.util.logging.Logger;
+import java.util.Properties;
 
 import javax.sql.DataSource;
 
@@ -11,11 +11,15 @@ import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.core.env.Environment;
+import org.springframework.orm.hibernate5.HibernateTransactionManager;
+import org.springframework.transaction.annotation.EnableTransactionManagement;
+import org.springframework.orm.hibernate5.LocalSessionFactoryBean;
 import org.springframework.web.servlet.ViewResolver;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.view.InternalResourceViewResolver;
 
 import com.mchange.v2.c3p0.ComboPooledDataSource;
+
 
 @Configuration
 @EnableWebMvc
@@ -26,41 +30,40 @@ public class DemoAppConfing {
 	@Autowired
 	private Environment env;
 	
+	@Bean
+    public LocalSessionFactoryBean sessionFactory() {
+        LocalSessionFactoryBean sessionFactory = new LocalSessionFactoryBean();
+        sessionFactory.setDataSource(dataSource());
+        sessionFactory.setPackagesToScan("gr.hua.dit.springmvc1.entity");
+        sessionFactory.setHibernateProperties(hibernateProperties());
+ 
+        return sessionFactory;
+    }
 	
+	@Bean
+    public DataSource dataSource() {
+		ComboPooledDataSource dataSource = new ComboPooledDataSource();
+
+		try {
+			
+			
+        dataSource.setDriverClass(env.getProperty("jdbc.driver"));
+        dataSource.setJdbcUrl(env.getProperty("jdbc.url"));
+        dataSource.setUser(env.getProperty("jdbc.user"));
+        dataSource.setPassword(env.getProperty("jdbc.password"));
+        
+        dataSource.setInitialPoolSize(getIntProperty("connection.pool.initialPoolSize"));
+        dataSource.setMinPoolSize(getIntProperty("connection.pool.minPoolSize"));
+        dataSource.setMaxPoolSize(getIntProperty("connection.pool.maxPoolSize"));
+        dataSource.setMaxIdleTime(getIntProperty("connection.pool.maxIdleTime"));
+		}
+		catch (PropertyVetoException exc) {
+			throw new RuntimeException(exc);
+		}
+ 
+        return dataSource;
+    }
 	
-	private Logger logger = Logger.getLogger(getClass().getName());
-	// Define a bean for ViewResolver
-	
-	
-//	@Bean
-//	public DataSource securityDataSource() {
-//		
-//		// Create connection pool
-//		ComboPooledDataSource securityDataSource = new ComboPooledDataSource();
-//		
-//		try {
-//			
-//			logger.info("jdbc.url = " + env.getProperty("jdbc.url"));
-//			
-//			securityDataSource.setDriverClass(env.getProperty("jdbc.driver"));
-//			securityDataSource.setJdbcUrl(env.getProperty("jdbc.url"));
-//			securityDataSource.setUser(env.getProperty("jdbc.user"));
-//			securityDataSource.setPassword(env.getProperty("jdbc.password"));
-//			
-//			securityDataSource.setInitialPoolSize(getIntProperty("connection.pool.initialPoolSize"));
-//			securityDataSource.setMinPoolSize(getIntProperty("connection.pool.minPoolSize"));
-//			securityDataSource.setMaxPoolSize(getIntProperty("connection.pool.maxPoolSize"));
-//			securityDataSource.setMaxIdleTime(getIntProperty("connection.pool.maxIdleTime"));
-//			
-//
-//		}
-//		catch (PropertyVetoException exc) {
-//			throw new RuntimeException(exc);
-//		}
-//		
-//		
-//		return securityDataSource;
-//	}
 	
 	private int getIntProperty(String propName) {
 		String propVal = env.getProperty(propName);
@@ -79,5 +82,17 @@ public class DemoAppConfing {
 		viewResolver.setSuffix(".jsp");
 		return viewResolver;
 	}
+	
+	
+	
+	private final Properties hibernateProperties() {
+        Properties hibernateProperties = new Properties();
+        hibernateProperties.setProperty(
+          "hibernate.show_sql", "true");
+        hibernateProperties.setProperty(
+          "hibernate.dialect", "org.hibernate.dialect.MySQLDialect");
+ 
+        return hibernateProperties;
+    }
 
 }
