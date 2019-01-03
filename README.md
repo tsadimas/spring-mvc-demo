@@ -1,5 +1,14 @@
 # spring-mvc-demo
 
+There are 4 branches:
+
+* master: a sample spring mvc project
+* hibernate: added hibernate using xml configuration
+* security: added security using login form
+* security-noxml: added security. No XML configuration
+* security-custom-auth: changed auth to use custom authentication service
+
+
 ## Clone Project into Eclipse
 
 
