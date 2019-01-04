@@ -1,5 +1,5 @@
+<%@ include file="/WEB-INF/jspf/header.jspf" %>
 <%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
-
 
 	<h3>Login</h3>
 	
@@ -20,4 +20,5 @@
 	</form:form>
 	
 </div>
+<%@ include file="/WEB-INF/jspf/footer.jspf" %>
 	

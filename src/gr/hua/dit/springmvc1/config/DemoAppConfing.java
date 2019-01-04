@@ -25,7 +25,9 @@ import com.mchange.v2.c3p0.ComboPooledDataSource;
 @EnableWebMvc
 @ComponentScan(basePackages="gr.hua.dit.springmvc1")
 @PropertySource("classpath:application.properties")
-public class DemoAppConfing {
+public class DemoAppConfing  {
+	
+	
 	
 	@Autowired
 	private Environment env;

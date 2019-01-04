@@ -1,3 +1,4 @@
+<jsp:include page="../jspf/header.jspf" />
 <%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
 
 <div class="ui segment">
@@ -21,3 +22,4 @@
 	</form:form>
 
 </div>
+<jsp:include page="../jspf/footer.jspf" />
