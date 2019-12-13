@@ -37,7 +37,7 @@
 	<bean id="myDataSource"
 		class="com.mchange.v2.c3p0.ComboPooledDataSource"
 		destroy-method="close">
-		<property name="driverClass" value="com.mysql.jdbc.Driver" />
+		<property name="driverClass" value="com.mysql.cj.jdbc.Driver" />
 		<property name="jdbcUrl"
 			value="${jdbc.url}" />
 		<property name="user" value="${jdbc.user}" />
