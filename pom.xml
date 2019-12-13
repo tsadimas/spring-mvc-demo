@@ -7,7 +7,7 @@
 	<version>0.0.1-SNAPSHOT</version>
 	<packaging>war</packaging>
 	<properties>
-		<org.springsecurity.version>5.1.2.RELEASE</org.springsecurity.version>
+		<org.springsecurity.version>5.2.1.RELEASE</org.springsecurity.version>
 		<org.springframework.version>5.2.2.RELEASE</org.springframework.version>
 		<hibernate.version>5.4.10.Final</hibernate.version>
 	</properties>
@@ -35,7 +35,7 @@
 			<artifactId>spring-orm</artifactId>
 			<version>${org.springframework.version}</version>
 		</dependency>
-
+		<!--  Spring Security  -->
 		<dependency>
 			<groupId>org.springframework.security</groupId>
 			<artifactId>spring-security-web</artifactId>
